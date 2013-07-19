@@ -1,4 +1,5 @@
 #! /usr/bin/perl -w
+# Usage : genlog.pl <path_from> <date_from> <date_to>
 # Extract IP and URL from files given as arguments
 # Sample :
 # 66.249.72.15 - - [24/Jun/2013:06:27:45 +0200] "GET /project/miss-better/ HTTP/1.1" 200 3914 "-" "Mozilla/5.0 (iPhone; U; CPU iPhone OS 4_1 like Mac OS X; en-us) AppleWebKit/532.9 (KHTML, like Gecko) Version/4.0.5 Mobile/8B117 Safari/6531.22.7 (compatible; Googlebot-Mobile/2.1; +http://www.google.com/bot.html)"
@@ -17,8 +18,8 @@ use DateTime;
 my $log_path = $ARGV[0];
 my $date_format = "%d/%b/%Y:%H:%M:%S";
 my $log_template = "%s - - [%s +0200] \"GET %s HTTP/1.1\" 200 4242 \"-\" \"Mozilla/5.0 (iPhone; U; CPU iPhone OS 4_1 like Mac OS X; en-us) AppleWebKit/532.9 (KHTML, like Gecko) Version/4.0.5 Mobile/8B117 Safari/6531.22.7 (compatible; Googlebot-Mobile/2.1; +http://www.google.com/bot.html)\"\n";
-my $date_from = DateTime->new(day => 1, month => $ARGV[1], year => 2013);
-my $date_to = DateTime->new(day => 1, month => ($ARGV[1] + 1), year => 2013);
+my $date_from = DateTime->new(day => substr($ARGV[1], 6, 2), month => substr($ARGV[1], 4, 2), year => substr($ARGV[1], 0, 4));
+my $date_to = DateTime->new(day => substr($ARGV[2], 6, 2), month => substr($ARGV[2], 4, 2), year => substr($ARGV[2], 0, 4));
 # END CONFIGURATION
 
 my %seen_ip = ();
