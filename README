@@ -1,0 +1,6 @@
+genlog : Log Generator
+
+This script generates webserver logs based on :
+- a list of IP
+- a list of URL
+- a period of time
